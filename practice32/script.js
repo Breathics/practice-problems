@@ -1,11 +1,10 @@
 function find_middle_letters(enter_string){
     if (enter_string.length%2){
-        var middle_letter = enter_string.charAt(Math.floor(enter_string.length/2));
-        return middle_letter
+        var middle_odd = enter_string[Math.floor(enter_string.length/2)];
+        return middle_odd
     } else {
-        var middle = enter_string / 2;
-        middle = (enter_string.charAt((enter_string.length-1)/2) + enter_string.charAt((enter_string.length)/2));
-        return middle
+        var middle_even = enter_string[(enter_string.length/2)-1] + enter_string[(enter_string.length)/2];
+        return middle_even
     }
 }
 
