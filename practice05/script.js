@@ -1,17 +1,16 @@
-function fizzbuzz(){
-    var range_output = '';
-    for (i = 1; i <= 100; i++){
-        if (i % 3 === 0 && i % 5 === 0){
-            range_output += "FizzBuzz ";
-        } else if (i % 3 === 0){
-            range_output += "Fizz ";
-        } else if (i % 5 === 0){
-            range_output += "Buzz ";
-        } else {
-            range_output += i + ' ';
+function fizzbuzz() {
+    for (var i = 1; i <= 100; i++) {
+        var output = '';
+        if (!(i % 3)) {
+            output += "Fizz";
         }
+        if (!(i % 5)) {
+            output += "Buzz";
+        }
+        if (!range_output) {
+            output += i;
+        }
+        console.log(output);
     }
-    console.log(range_output);
 }
-
 fizzbuzz();
