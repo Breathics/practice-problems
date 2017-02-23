@@ -6,53 +6,42 @@
 // position: index of the position of the error
 //
 
-// Possibilities: missing ), mistmatched (, empty (),
+// Possibilities: missing ), mismatched (, empty (),
 // if spaces ' ', do not account for this
 
-
-var ex = '2 + 4 (6 + (2 x (3/2) + 2 + (4-6)))';
-
-function checkParen(ex){
-  var paren = 0;
-  var result = {
-    correct: null,
-    error: null,
-    position: null
-  }
-  for (var i = 0; i < ex.length; i++){
-    if (ex[i] === '('){
-      paren++;
-//       console.log(paren);
-    } else if (ex[i] === ')'){
-      paren--;
-      var hold = i;
-      console.log('Position of ending paren');
-//       console.log(paren);
+// var ex = '2 + 4(6 + (2 x (3/2) + 2 + (4-6)))'; // Sample data
+var ex = '(((2)) + 4'
+function checkParen(ex) {
+    var paren = 0;
+    var result = { // Object created to store correct/error
+        correct: null,
+        error: null,
+        position: null
     }
-  }
-  if (paren === 0){
-    result.correct = true;
-    result.error = 'No errors';
-    result.position = 'Everything looks good';
-    return console.log(result);
-  } else {
-    result.correct = false;
-    if (paren > 0){
-      result.error = 'Mismatched parentheses (, too many!';
-      result.position = 'Figuring this out still';
-    } else if (paren < 0){
-      result.error = 'Missing parentheses )'
-      result.position = 'Figuring this out still';
+    for (var i = 0; i < ex.length; i++) { // Search for open and closing parentheses, will update paren for complete parentheses
+        if (ex[i] === '(') {
+            paren++;
+        } else if (ex[i] === ')') {
+            paren--;
+            if (paren < 0){ // Returns result object for too many ending parentheses
+                result.correct = false;
+                result.error = 'Mismatched (';
+                result.position = 'Error position at index: ' + i;
+                return result;
+            }
+        }
     }
-    return console.log(result);
-  }
-
-
-
-//     console.log(ex[i]);
-
-
-
+    if (paren === 0) { // Returns result object for correct syntax of expression
+        result.correct = true;
+        result.error = 'No errors';
+        result.position = 'Everything looks good';
+        return result;
+    } else if (paren > 0){ // Returns result object for too many opening parentheses
+        result.correct = false;
+        result.error = 'Missing )';
+        result.position = 'Error position at index: ' + i;
+        return result;
+    }
 }
 
 checkParen(ex);
